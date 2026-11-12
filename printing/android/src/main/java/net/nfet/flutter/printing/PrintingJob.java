@@ -413,8 +413,12 @@ public class PrintingJob extends PrintDocumentAdapter {
     void setDocument(byte[] data) {
         documentData = data;
 
+        // Tronche fork: PHOTO, not DOCUMENT. The Default Print Service
+        // (BIPS, StartJobTask.isBorderless) only prints borderless for PHOTO;
+        // with DOCUMENT it keeps the printer's default margins (2-4 mm white
+        // border on a Canon SELPHY CP1500).
         PrintDocumentInfo info = new PrintDocumentInfo.Builder(jobName)
-                                         .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                                         .setContentType(PrintDocumentInfo.CONTENT_TYPE_PHOTO)
                                          .build();
 
         // Content layout reflow is complete
